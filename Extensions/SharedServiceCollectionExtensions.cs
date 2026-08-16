@@ -28,13 +28,13 @@ public static class SharedServiceCollectionExtensions
         });
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        services.AddExceptionHandler<GlobalExceptionHandler>();
-        services.AddProblemDetails();
-        services.AddCarter();
+        services.AddCarter(new DependencyContextAssemblyCatalog(applicationAssemblies));
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
         return services;
     }
 
