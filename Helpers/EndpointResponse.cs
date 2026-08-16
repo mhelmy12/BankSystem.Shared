@@ -1,8 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Http;
-using Shared.Helpers;
 
-namespace Account_Service.Helpers;
+namespace Shared.Helpers;
 
 public static class EndpointResponse
 {
