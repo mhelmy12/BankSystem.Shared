@@ -7,7 +7,7 @@
 
 
     <PackageId>MyBank.Shared.Core</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>MHelmy</Authors>
     <Company>MyBank Inc.</Company>
     <Description>Shared core library for MyBank microservices.</Description>
@@ -18,6 +18,8 @@
     <PackageReference Include="Carter" Version="8.2.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
     <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="IdGen.DependencyInjection" Version="3.0.7" />
+
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.7.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />

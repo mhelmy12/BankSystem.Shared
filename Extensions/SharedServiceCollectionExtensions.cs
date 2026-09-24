@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Behaviors;
 using Shared.Helpers;
+using Shared.Services.CurrentUserService;
+using Shared.Services.IdGeneratorService;
 
 namespace Shared.Extensions;
 
@@ -27,6 +29,8 @@ public static class SharedServiceCollectionExtensions
             }
         });
 
+        services.AddHttpContextAccessor();
+
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddCarter(new DependencyContextAssemblyCatalog(applicationAssemblies));
 
@@ -35,6 +39,8 @@ public static class SharedServiceCollectionExtensions
 
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
+        services.AddKeyedScoped<ICurrentUserService, CurrentUserFromHeaders>("Headers");
+        services.AddKeyedSingleton<IIdGeneratorService, SnowflakeIdGenerator>("Snowflake");
         return services;
     }
 
