@@ -10,19 +10,19 @@ public static class EndpointResponse
         switch (response.StatusCode)
         {
             case HttpStatusCode.NotFound:
-                return Results.NotFound(response);
+                return Microsoft.AspNetCore.Http.Results.NotFound(response);
             case HttpStatusCode.BadRequest:
-                return Results.BadRequest(response);
+                return Microsoft.AspNetCore.Http.Results.BadRequest(response);
             case HttpStatusCode.InternalServerError:
-                return Results.InternalServerError(response);
+                return Microsoft.AspNetCore.Http.Results.InternalServerError(response);
             case HttpStatusCode.Unauthorized:
-                return Results.Unauthorized();
+                return Microsoft.AspNetCore.Http.Results.Unauthorized();
             case HttpStatusCode.UnprocessableEntity:
-                return Results.UnprocessableEntity(response);
+                return Microsoft.AspNetCore.Http.Results.UnprocessableEntity(response);
             case HttpStatusCode.Created:
-                return Results.Created(response.Meta.ToString(), response);
+                return Microsoft.AspNetCore.Http.Results.Created(response.Meta.ToString(), response);
             default:
-                return Results.Ok(response);
+                return Microsoft.AspNetCore.Http.Results.Ok(response);
         }
 
     }

@@ -1,21 +1,22 @@
 using System;
 
-namespace Shared.AspNetCore.Results;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Results;
 
+namespace Shared.AspNetCore.Results;
+
 public static class ResultExtensions
 {
     public static IResult ToHttpResult(this Result result)
         => result.IsSuccess
-            ? Results.NoContent()
+            ? Microsoft.AspNetCore.Http.Results.NoContent()
             : MapError(result.Error);
 
     public static IResult ToHttpResult<T>(this Result<T> result)
         => result.IsSuccess
-            ? Results.Ok(result.Value)
+            ? Microsoft.AspNetCore.Http.Results.Ok(result.Value)
             : MapError(result.Error);
 
     public static IResult ToHttpResult<T>(this Result<T> result, Func<T, IResult> onSuccess)
@@ -25,32 +26,32 @@ public static class ResultExtensions
 
     private static IResult MapError(Error error) => error.Type switch
     {
-        ErrorType.Validation => Results.Problem(
+        ErrorType.Validation => Microsoft.AspNetCore.Http.Results.Problem(
             title: "Validation failed",
             detail: error.Message,
             statusCode: StatusCodes.Status400BadRequest),
 
-        ErrorType.NotFound => Results.Problem(
+        ErrorType.NotFound => Microsoft.AspNetCore.Http.Results.Problem(
             title: "Not found",
             detail: error.Message,
             statusCode: StatusCodes.Status404NotFound),
 
-        ErrorType.Conflict => Results.Problem(
+        ErrorType.Conflict => Microsoft.AspNetCore.Http.Results.Problem(
             title: "Conflict",
             detail: error.Message,
             statusCode: StatusCodes.Status409Conflict),
 
-        ErrorType.Unauthorized => Results.Problem(
+        ErrorType.Unauthorized => Microsoft.AspNetCore.Http.Results.Problem(
             title: "Unauthorized",
             detail: error.Message,
             statusCode: StatusCodes.Status401Unauthorized),
 
-        ErrorType.Forbidden => Results.Problem(
+        ErrorType.Forbidden => Microsoft.AspNetCore.Http.Results.Problem(
             title: "Forbidden",
             detail: error.Message,
             statusCode: StatusCodes.Status403Forbidden),
 
-        _ => Results.Problem(
+        _ => Microsoft.AspNetCore.Http.Results.Problem(
             title: "An error occurred",
             detail: error.Message,
             statusCode: StatusCodes.Status500InternalServerError)
